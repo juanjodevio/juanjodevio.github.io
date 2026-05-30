@@ -99,12 +99,12 @@ nav.on-light .meta .t{color:var(--accent2)}
 .giant .l span{display:block;transform:translateY(0)}
 .giant,.htitle,.cta h2{text-wrap:balance}
 .hero .r1{font-size:clamp(2.75rem,11vw,6rem)}
-.hero .r2{font-size:clamp(2.75rem,11vw,6rem);color:transparent;-webkit-text-stroke:2px var(--paper);display:flex;align-items:baseline;gap:.2em;flex-wrap:wrap}
-.hero .r2 em{font-style:normal;-webkit-text-stroke:0;color:var(--accent);font-size:.38em;font-family:'Archivo',sans-serif;font-weight:700;text-transform:none;letter-spacing:-.02em;transform:translateY(-.25em)}
+.hero .r2{font-size:clamp(2.75rem,11vw,6rem);color:transparent;-webkit-text-stroke:1px var(--paper);paint-order:stroke fill;display:flex;align-items:baseline;gap:.2em;flex-wrap:wrap}
+.hero .r2 em{font-style:normal;color:var(--accent);font-size:.38em;font-family:'Archivo',sans-serif;font-weight:500;text-transform:none;letter-spacing:-.02em;transform:translateY(-.25em)}
 .hero .bottom{display:flex;justify-content:space-between;align-items:flex-end;margin-top:40px;flex-wrap:wrap;gap:28px}
 .hero .bottom p{max-width:44ch;font-size:17px;line-height:1.55;color:var(--body-on-dark)}
 .hero .bottom .actions{display:flex;gap:14px;flex-wrap:wrap}
-.btn{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;padding:15px 24px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;border-radius:100px;transition:transform .3s}
+.btn{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;padding:15px 24px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;border-radius:100px;transition:transform .3s}
 .btn-p{background:var(--accent);color:#0A0A0A}
 .btn-s{border:1px solid var(--line);color:var(--paper)}
 .btn:hover{transform:translateY(-2px)}
@@ -113,7 +113,7 @@ nav.on-light .meta .t{color:var(--accent2)}
 .marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:22px 0;overflow:hidden;white-space:nowrap;background:var(--bg)}
 .marquee .track{display:inline-flex;gap:0;animation:scroll 26s linear infinite}
 .marquee span{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:42px;letter-spacing:.02em;padding:0 28px;color:var(--paper)}
-.marquee span:nth-child(even){color:transparent;-webkit-text-stroke:1px var(--paper)}
+.marquee span:nth-child(even){color:transparent;-webkit-text-stroke:.5px var(--paper);paint-order:stroke fill}
 .marquee .star{color:var(--accent)!important;-webkit-text-stroke:0!important}
 @keyframes scroll{to{transform:translateX(-50%)}}
 
@@ -122,13 +122,15 @@ nav.on-light .meta .t{color:var(--accent2)}
 @media(max-width:760px){.block,.hero{padding-left:24px;padding-right:24px}}
 .idx{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--accent);letter-spacing:1px;display:flex;align-items:center;gap:14px;margin-bottom:36px}
 .idx::after{content:"";flex:1;height:1px;background:var(--line)}
-.htitle{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:clamp(36px,7vw,96px);line-height:.92;letter-spacing:-.005em}
+.htitle{font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;font-size:clamp(32px,6vw,80px);line-height:.94;letter-spacing:0}
+.htitle--outline{color:transparent;-webkit-text-stroke:1px var(--paper);paint-order:stroke fill}
+@media(min-width:768px){.htitle--outline{-webkit-text-stroke:.75px var(--paper)}}
 .mask{overflow:hidden}.mask .mi{display:block;transform:translateY(0)}
 
 /* about */
 .about{display:grid;grid-template-columns:1.1fr 1fr;gap:60px;margin-top:48px;align-items:start}
 @media(max-width:860px){.about{grid-template-columns:1fr;gap:36px}}
-.about .lead{font-size:clamp(20px,2.4vw,30px);line-height:1.35;font-weight:500;letter-spacing:-.01em}
+.about .lead{font-size:clamp(20px,2.4vw,28px);line-height:1.4;font-weight:400;letter-spacing:-.01em}
 .about .lead b{color:var(--accent)}
 .about .caps{display:flex;flex-wrap:wrap;gap:10px;align-content:start}
 .about .caps .c{font-family:'JetBrains Mono',monospace;font-size:13px;padding:10px 16px;border:1px solid var(--line);border-radius:100px;color:var(--body-on-dark);transition:background .3s,color .3s,border-color .3s}
@@ -136,30 +138,29 @@ nav.on-light .meta .t{color:var(--accent2)}
 
 /* services — broken grid */
 .svc{margin-top:24px}
-.srow{display:grid;grid-template-columns:80px 1fr 360px;gap:32px;align-items:center;padding:40px 0;border-top:1px solid var(--line);transition:transform .4s ease}
+.srow{display:grid;grid-template-columns:1fr minmax(0,360px);gap:32px;align-items:center;padding:40px 0;border-top:1px solid var(--line);transition:transform .4s ease}
 .srow:hover{transform:translateX(12px)}
 .srow:last-child{border-bottom:1px solid var(--line)}
-.srow .n{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--accent)}
-.srow h3{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:clamp(28px,4vw,56px);line-height:.95;letter-spacing:-.01em;transition:.4s}
+.srow h3{font-family:'Archivo',sans-serif;font-weight:600;text-transform:uppercase;font-size:clamp(22px,3.2vw,40px);line-height:1.05;letter-spacing:-.02em;transition:color .4s}
 .srow:hover h3{color:var(--accent)}
 .srow p{font-size:15px;line-height:1.55;color:var(--muted)}
 @media(max-width:760px){.srow{grid-template-columns:1fr;gap:14px;padding:28px 0}.srow p{max-width:none}}
 
-/* process — horizontal numbers */
-.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:24px}
+/* process — ordered steps */
+.steps{list-style:none;margin:24px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:0}
 @media(max-width:860px){.steps{grid-template-columns:1fr 1fr}}
 @media(max-width:520px){.steps{grid-template-columns:1fr}}
 .step{padding:36px 28px 36px 0;border-right:1px solid var(--line)}
 .step:last-child{border-right:none}
-.step .n{font-family:'Anton',sans-serif;font-size:80px;color:transparent;-webkit-text-stroke:1.5px var(--accent);line-height:.8}
-.step h4{font-family:'Archivo',sans-serif;font-weight:700;font-size:20px;margin:20px 0 12px;text-transform:uppercase;letter-spacing:-.01em}
+.step .n{font-family:'Archivo',sans-serif;font-weight:600;font-size:clamp(48px,6vw,64px);color:var(--line);line-height:1}
+.step h4{font-family:'Archivo',sans-serif;font-weight:600;font-size:18px;margin:20px 0 12px;text-transform:uppercase;letter-spacing:-.01em}
 .step p{font-size:14px;line-height:1.6;color:var(--muted)}
 
 /* stack */
 .stk{margin-top:24px;display:flex;flex-direction:column}
 .stkrow{display:grid;grid-template-columns:200px 1fr;gap:32px;padding:26px 0;border-top:1px solid var(--line);align-items:center}
 .stkrow:last-child{border-bottom:1px solid var(--line)}
-.stkrow .l{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:28px;letter-spacing:.01em}
+.stkrow .l{font-family:'Archivo',sans-serif;font-weight:600;text-transform:uppercase;font-size:22px;letter-spacing:.02em;color:var(--paper)}
 .stkrow .t{display:flex;flex-wrap:wrap;gap:10px}
 .stkrow .t span{font-family:'JetBrains Mono',monospace;font-size:14px;padding:8px 15px;border:1px solid var(--line);color:var(--body-on-dark);transition:background .3s,color .3s}
 .stkrow .t span:hover{background:var(--paper);color:#0A0A0A}
@@ -168,7 +169,7 @@ nav.on-light .meta .t{color:var(--accent2)}
 /* positioning — full bleed paper */
 .pos{background:var(--paper);color:var(--ink);padding:120px 40px;border:none}
 .pos .idx{color:var(--accent2)}.pos .idx::after{background:var(--line-l)}
-.pos h2{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:clamp(32px,6vw,84px);line-height:.92;letter-spacing:-.01em;max-width:1000px}
+.pos h2{font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;font-size:clamp(28px,5.5vw,72px);line-height:.96;letter-spacing:0;max-width:1000px}
 .pos h2 em{font-style:normal;color:var(--accent2)}
 .pos p{margin-top:32px;font-size:19px;line-height:1.6;color:#3A372E;max-width:680px}
 
@@ -179,20 +180,21 @@ nav.on-light .meta .t{color:var(--accent2)}
 .proj .p:nth-child(even){border-right:none}
 .proj .p:hover{background:#141414}
 .proj .p .k{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent);margin-bottom:16px}
-.proj .p h4{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:30px;line-height:.95;margin-bottom:12px}
+.proj .p h4{font-family:'Archivo',sans-serif;font-weight:600;text-transform:uppercase;font-size:22px;line-height:1.1;margin-bottom:12px;letter-spacing:-.01em}
 .proj .p p{font-size:14.5px;line-height:1.55;color:var(--muted);max-width:420px}
 
 /* cta */
 .cta{padding:160px 40px;text-align:center;border:none}
 .cta .pr{font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:14px;margin-bottom:28px}
-.cta h2{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:clamp(2.5rem,9vw,6rem);line-height:.88;letter-spacing:-.02em}
-.cta h2 em{font-style:normal;color:transparent;-webkit-text-stroke:2px var(--paper)}
+.cta h2{font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;font-size:clamp(2.25rem,8vw,5.5rem);line-height:.92;letter-spacing:0}
+.cta h2 em{font-style:normal;color:transparent;-webkit-text-stroke:1px var(--paper);paint-order:stroke fill}
+@media(min-width:768px){.cta h2 em{-webkit-text-stroke:.75px var(--paper)}}
 .cta p{max-width:44ch;margin:32px auto 0;font-size:18px;line-height:1.55;color:var(--body-on-dark)}
 .cta .btn{margin-top:40px;font-size:15px;padding:18px 32px}
 
 /* footer */
 footer{padding:48px 40px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:28px;align-items:flex-start}
-footer .brand{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:38px;line-height:.9}
+footer .brand{font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;font-size:32px;line-height:.92}
 footer .role{font-family:'JetBrains Mono',monospace;color:var(--muted);font-size:13px;margin-top:14px}
 footer .links{display:flex;flex-direction:column;gap:10px}
 footer .links a{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--paper);text-decoration:none;transition:.3s}
@@ -231,7 +233,7 @@ footer .copy{width:100%;font-family:'JetBrains Mono',monospace;font-size:12px;co
 <section class="block" id="sobre">
   <div class="idx">Sobre mí</div>
   <h2 class="htitle mask"><span class="mi">Ingeniería,</span></h2>
-  <h2 class="htitle mask" style="color:transparent;-webkit-text-stroke:1.5px var(--paper)"><span class="mi">negocio & ejecución</span></h2>
+  <h2 class="htitle htitle--outline mask"><span class="mi">negocio & ejecución</span></h2>
   <div class="about">
     <div class="lead">Mi enfoque combina experiencia técnica en data engineering, cloud, automatización e <b>inteligencia artificial</b> con visión de negocio. No construyo tecnología por construir: diseño sistemas que <b>reducen fricción, mejoran decisiones y habilitan crecimiento.</b></div>
     <div class="caps">
@@ -243,22 +245,22 @@ footer .copy{width:100%;font-family:'JetBrains Mono',monospace;font-size:12px;co
 <section class="block" id="servicios">
   <div class="idx">Servicios</div>
   <div class="svc">
-    <div class="srow" data-h><div class="n">(01)</div><h3>Data Engineering & Cloud</h3><p>Diseño e implementación de pipelines, data lakes, data warehouses y arquitecturas escalables en AWS.</p></div>
-    <div class="srow" data-h><div class="n">(02)</div><h3>Dashboards & Analytics</h3><p>Transformo datos dispersos en métricas claras para dirección, finanzas, operaciones y ventas.</p></div>
-    <div class="srow" data-h><div class="n">(03)</div><h3>AI Workflows & Automation</h3><p>Uso IA, agentes y automatización para optimizar procesos internos y acelerar equipos.</p></div>
-    <div class="srow" data-h><div class="n">(04)</div><h3>Data Strategy Consulting</h3><p>Defino una hoja de ruta realista para ordenar tus datos y convertirlos en ventaja competitiva.</p></div>
+    <div class="srow" data-h><h3>Data Engineering & Cloud</h3><p>Diseño e implementación de pipelines, data lakes, data warehouses y arquitecturas escalables en AWS.</p></div>
+    <div class="srow" data-h><h3>Dashboards & Analytics</h3><p>Transformo datos dispersos en métricas claras para dirección, finanzas, operaciones y ventas.</p></div>
+    <div class="srow" data-h><h3>AI Workflows & Automation</h3><p>Uso IA, agentes y automatización para optimizar procesos internos y acelerar equipos.</p></div>
+    <div class="srow" data-h><h3>Data Strategy Consulting</h3><p>Defino una hoja de ruta realista para ordenar tus datos y convertirlos en ventaja competitiva.</p></div>
   </div>
 </section>
 
 <section class="block" id="proceso">
   <div class="idx">Proceso</div>
   <h2 class="htitle mask"><span class="mi">Cómo trabajo</span></h2>
-  <div class="steps">
-    <div class="step"><div class="n">01</div><h4>Diagnóstico</h4><p>Entendemos el problema, las fuentes de datos y las prioridades del negocio.</p></div>
-    <div class="step"><div class="n">02</div><h4>Diseño</h4><p>Definimos una arquitectura simple, mantenible y alineada al presupuesto.</p></div>
-    <div class="step"><div class="n">03</div><h4>Implementación</h4><p>Construimos pipelines, modelos, dashboards o automatizaciones con foco en impacto.</p></div>
-    <div class="step"><div class="n">04</div><h4>Evolución</h4><p>Medimos resultados, documentamos y dejamos una base lista para crecer.</p></div>
-  </div>
+  <ol class="steps" aria-label="Etapas del proceso">
+    <li class="step"><span class="n" aria-hidden="true">1</span><h4>Diagnóstico</h4><p>Entendemos el problema, las fuentes de datos y las prioridades del negocio.</p></li>
+    <li class="step"><span class="n" aria-hidden="true">2</span><h4>Diseño</h4><p>Definimos una arquitectura simple, mantenible y alineada al presupuesto.</p></li>
+    <li class="step"><span class="n" aria-hidden="true">3</span><h4>Implementación</h4><p>Construimos pipelines, modelos, dashboards o automatizaciones con foco en impacto.</p></li>
+    <li class="step"><span class="n" aria-hidden="true">4</span><h4>Evolución</h4><p>Medimos resultados, documentamos y dejamos una base lista para crecer.</p></li>
+  </ol>
 </section>
 
 <section class="block" id="stack">
