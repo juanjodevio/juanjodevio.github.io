@@ -1,30 +1,313 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>juanjodev.io</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Juan Palomino — Data Engineer</title>
+<meta name="description" content="Senior Data Engineer en Ecuador. Pipelines, cloud AWS, dashboards, automatización e IA para convertir datos en sistemas que hacen crecer negocios.">
+<meta name="author" content="Juan Palomino">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0A0A0A">
+<link rel="canonical" href="https://juanjodevio.github.io/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://juanjodevio.github.io/">
+<meta property="og:title" content="Juan Palomino — Data Engineer">
+<meta property="og:description" content="Convierto datos, nube e inteligencia artificial en sistemas que hacen crecer negocios. Data engineering, AWS, IA y consultoría.">
+<meta property="og:image" content="https://juanjodevio.github.io/og-image.svg">
+<meta property="og:locale" content="es_EC">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Juan Palomino — Data Engineer">
+<meta name="twitter:description" content="Convierto datos, nube e inteligencia artificial en sistemas que hacen crecer negocios.">
+<meta name="twitter:image" content="https://juanjodevio.github.io/og-image.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Juan Palomino",
+  "jobTitle": "Data Engineer",
+  "url": "https://juanjodevio.github.io/",
+  "email": "mailto:juan@dominio.com",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Guayaquil",
+    "addressCountry": "EC"
+  },
+  "sameAs": [
+    "https://github.com/juanjodevio"
+  ],
+  "knowsAbout": ["Data Engineering", "AWS", "Python", "SQL", "dbt", "Terraform", "Artificial Intelligence"]
+}
+</script>
+<style>
+:root{
+  --bg:#0A0A0A; --paper:#F2EFE9; --ink:#0A0A0A;
+  --muted:#7A7568; --line:#2A2A28; --line-l:#D8D3C8;
+  --accent:#E8FE5C; --accent2:#FF5C38;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--paper);font-family:'Archivo',sans-serif;overflow-x:hidden;cursor:none;-webkit-font-smoothing:antialiased}
+body,a,button,.btn,[data-h],nav,.srow,.stkrow .t span,.about .caps .c{cursor:none}
+.mono{font-family:'JetBrains Mono',monospace}
+::selection{background:var(--accent);color:#0A0A0A}
 
-    <!-- bootstrap cdn -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <!-- bootstrap cdn end -->
-    <link rel="stylesheet" href="css/style.css">
+/* custom cursor */
+.cursor{position:fixed;width:14px;height:14px;border-radius:50%;background:var(--accent);z-index:9999;pointer-events:none;mix-blend-mode:difference;transition:transform .25s ease,width .25s,height .25s}
+.cursor.big{width:64px;height:64px;background:var(--accent2)}
+@media(max-width:760px){body,a,button,.btn,[data-h],nav,.srow{cursor:auto}.cursor{display:none}}
+@media(hover:none){body,a,button,.btn,[data-h]{cursor:auto}.cursor{display:none}}
 
+/* nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:24px 40px;mix-blend-mode:difference}
+nav .brand{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:14px;letter-spacing:0}
+nav .meta{font-family:'JetBrains Mono',monospace;font-size:12px;display:flex;gap:24px}
+nav .meta span{opacity:.6}
+@media(max-width:620px){nav .meta span:not(.t){display:none}nav{padding:18px 24px}}
+
+/* hero */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:120px 40px 40px;position:relative}
+.hero .top{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--accent);letter-spacing:1px;margin-bottom:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;border-bottom:1px solid var(--line);padding-bottom:16px}
+.giant{font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;line-height:.82;letter-spacing:-.01em}
+.giant .l{display:block;overflow:hidden}
+.giant .l span{display:block;transform:translateY(110%)}
+.hero .r1{font-size:clamp(54px,15vw,230px)}
+.hero .r2{font-size:clamp(54px,15vw,230px);color:transparent;-webkit-text-stroke:2px var(--paper);display:flex;align-items:baseline;gap:.2em}
+.hero .r2 em{font-style:normal;-webkit-text-stroke:0;color:var(--accent);font-size:.32em;font-family:'Archivo',sans-serif;font-weight:700;text-transform:none;letter-spacing:-.02em;transform:translateY(-.3em)}
+.hero .bottom{display:flex;justify-content:space-between;align-items:flex-end;margin-top:40px;flex-wrap:wrap;gap:28px}
+.hero .bottom p{max-width:440px;font-size:17px;line-height:1.55;color:#C9C4B8}
+.hero .bottom .actions{display:flex;gap:14px;flex-wrap:wrap}
+.btn{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;padding:15px 24px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;border-radius:100px;transition:transform .3s}
+.btn-p{background:var(--accent);color:#0A0A0A}
+.btn-s{border:1px solid var(--line);color:var(--paper)}
+.btn:hover{transform:translateY(-2px)}
+
+/* marquee */
+.marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:22px 0;overflow:hidden;white-space:nowrap;background:var(--bg)}
+.marquee .track{display:inline-flex;gap:0;animation:scroll 26s linear infinite}
+.marquee span{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:42px;letter-spacing:.02em;padding:0 28px;color:var(--paper)}
+.marquee span:nth-child(even){color:transparent;-webkit-text-stroke:1px var(--paper)}
+.marquee .star{color:var(--accent)!important;-webkit-text-stroke:0!important}
+@keyframes scroll{to{transform:translateX(-50%)}}
+
+/* paper section block */
+.block{padding:120px 40px;border-bottom:1px solid var(--line)}
+@media(max-width:760px){.block,.hero{padding-left:24px;padding-right:24px}}
+.idx{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--accent);letter-spacing:1px;display:flex;align-items:center;gap:14px;margin-bottom:36px}
+.idx::after{content:"";flex:1;height:1px;background:var(--line)}
+.htitle{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:clamp(36px,7vw,96px);line-height:.92;letter-spacing:-.005em}
+.mask{overflow:hidden}.mask .mi{display:block;transform:translateY(105%)}
+
+/* about */
+.about{display:grid;grid-template-columns:1.1fr 1fr;gap:60px;margin-top:48px;align-items:start}
+@media(max-width:860px){.about{grid-template-columns:1fr;gap:36px}}
+.about .lead{font-size:clamp(20px,2.4vw,30px);line-height:1.35;font-weight:500;letter-spacing:-.01em}
+.about .lead b{color:var(--accent)}
+.about .caps{display:flex;flex-wrap:wrap;gap:10px;align-content:start}
+.about .caps .c{font-family:'JetBrains Mono',monospace;font-size:13px;padding:10px 16px;border:1px solid var(--line);border-radius:100px;color:#C9C4B8;transition:.3s}
+.about .caps .c:hover{background:var(--accent);color:#0A0A0A;border-color:var(--accent)}
+
+/* services — broken grid */
+.svc{margin-top:24px}
+.srow{display:grid;grid-template-columns:80px 1fr 360px;gap:32px;align-items:center;padding:40px 0;border-top:1px solid var(--line);transition:padding .4s}
+.srow:hover{padding-left:24px}
+.srow:last-child{border-bottom:1px solid var(--line)}
+.srow .n{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--accent)}
+.srow h3{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:clamp(28px,4vw,56px);line-height:.95;letter-spacing:-.01em;transition:.4s}
+.srow:hover h3{color:var(--accent)}
+.srow p{font-size:15px;line-height:1.55;color:var(--muted)}
+@media(max-width:760px){.srow{grid-template-columns:1fr;gap:14px;padding:28px 0}.srow p{max-width:none}}
+
+/* process — horizontal numbers */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:24px}
+@media(max-width:860px){.steps{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.steps{grid-template-columns:1fr}}
+.step{padding:36px 28px 36px 0;border-right:1px solid var(--line)}
+.step:last-child{border-right:none}
+.step .n{font-family:'Anton',sans-serif;font-size:80px;color:transparent;-webkit-text-stroke:1.5px var(--accent);line-height:.8}
+.step h4{font-family:'Archivo',sans-serif;font-weight:700;font-size:20px;margin:20px 0 12px;text-transform:uppercase;letter-spacing:-.01em}
+.step p{font-size:14px;line-height:1.6;color:var(--muted)}
+
+/* stack */
+.stk{margin-top:24px;display:flex;flex-direction:column}
+.stkrow{display:grid;grid-template-columns:200px 1fr;gap:32px;padding:26px 0;border-top:1px solid var(--line);align-items:center}
+.stkrow:last-child{border-bottom:1px solid var(--line)}
+.stkrow .l{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:28px;letter-spacing:.01em}
+.stkrow .t{display:flex;flex-wrap:wrap;gap:10px}
+.stkrow .t span{font-family:'JetBrains Mono',monospace;font-size:14px;padding:8px 15px;border:1px solid var(--line);color:#C9C4B8;transition:.3s}
+.stkrow .t span:hover{background:var(--paper);color:#0A0A0A}
+@media(max-width:620px){.stkrow{grid-template-columns:1fr;gap:14px}}
+
+/* positioning — full bleed paper */
+.pos{background:var(--paper);color:var(--ink);padding:120px 40px;border:none}
+.pos .idx{color:var(--accent2)}.pos .idx::after{background:var(--line-l)}
+.pos h2{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:clamp(32px,6vw,84px);line-height:.92;letter-spacing:-.01em;max-width:1000px}
+.pos h2 em{font-style:normal;color:var(--accent2)}
+.pos p{margin-top:32px;font-size:19px;line-height:1.6;color:#3A372E;max-width:680px}
+
+/* projects */
+.proj{display:grid;grid-template-columns:repeat(2,1fr);gap:0;margin-top:24px;border-top:1px solid var(--line)}
+@media(max-width:760px){.proj{grid-template-columns:1fr}}
+.proj .p{padding:40px 32px;border-bottom:1px solid var(--line);border-right:1px solid var(--line);transition:.4s;position:relative}
+.proj .p:nth-child(even){border-right:none}
+.proj .p:hover{background:#141414}
+.proj .p .k{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent);margin-bottom:16px}
+.proj .p h4{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:30px;line-height:.95;margin-bottom:12px}
+.proj .p p{font-size:14.5px;line-height:1.55;color:var(--muted);max-width:420px}
+
+/* cta */
+.cta{padding:160px 40px;text-align:center;border:none}
+.cta .pr{font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:14px;margin-bottom:28px}
+.cta h2{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:clamp(40px,9vw,150px);line-height:.85;letter-spacing:-.01em}
+.cta h2 em{font-style:normal;color:transparent;-webkit-text-stroke:2px var(--paper)}
+.cta p{max-width:540px;margin:32px auto 0;font-size:18px;line-height:1.55;color:#C9C4B8}
+.cta .btn{margin-top:40px;font-size:15px;padding:18px 32px}
+
+/* footer */
+footer{padding:48px 40px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:28px;align-items:flex-start}
+footer .brand{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:38px;line-height:.9}
+footer .role{font-family:'JetBrains Mono',monospace;color:var(--muted);font-size:13px;margin-top:14px}
+footer .links{display:flex;flex-direction:column;gap:10px}
+footer .links a{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--paper);text-decoration:none;transition:.3s}
+footer .links a:hover{color:var(--accent)}
+footer .copy{width:100%;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:24px}
+</style>
 </head>
-
 <body>
-    <div class="container p-5 text-center">
-        <h1>MUY PRONTO</h1>
-        <h3>Aqui estará la poderisísima pagina de <b>juanjodev.io</b></h3>
+<div class="cursor" id="cur"></div>
 
+<nav aria-label="Principal">
+  <div class="brand">JUAN PALOMINO</div>
+  <div class="meta"><span>DATA ENGINEER</span><span>ECUADOR</span><span class="t">[ 2026 ]</span></div>
+</nav>
+
+<header class="hero">
+  <div class="top"><span>// SENIOR DATA ENGINEER & EMPRENDEDOR</span><span>EC · LATAM · REMOTO</span></div>
+  <h1 class="giant">
+    <span class="r1 l"><span>DATA</span></span>
+    <span class="r2 l"><span>ENGINEER <em>+ ia + cloud</em></span></span>
+  </h1>
+  <div class="bottom">
+    <p>Convierto datos, nube e inteligencia artificial en sistemas que hacen crecer negocios. Ordeno información, automatizo procesos y construyo soluciones escalables.</p>
+    <div class="actions">
+      <a href="#contacto" class="btn btn-p" data-h>Agendar conversación →</a>
+      <a href="#servicios" class="btn btn-s" data-h>Ver experiencia</a>
     </div>
+  </div>
+</header>
 
+<div class="marquee" aria-hidden="true"><div class="track" id="track">
+  <span>AWS</span><span class="star">✸</span><span>PYTHON</span><span class="star">✸</span><span>SQL</span><span class="star">✸</span><span>DBT</span><span class="star">✸</span><span>TERRAFORM</span><span class="star">✸</span><span>IA</span><span class="star">✸</span><span>PIPELINES</span><span class="star">✸</span><span>DASHBOARDS</span><span class="star">✸</span>
+  <span>AWS</span><span class="star">✸</span><span>PYTHON</span><span class="star">✸</span><span>SQL</span><span class="star">✸</span><span>DBT</span><span class="star">✸</span><span>TERRAFORM</span><span class="star">✸</span><span>IA</span><span class="star">✸</span><span>PIPELINES</span><span class="star">✸</span><span>DASHBOARDS</span><span class="star">✸</span>
+</div></div>
+
+<section class="block" id="sobre">
+  <div class="idx">01 / SOBRE MÍ</div>
+  <h2 class="htitle mask"><span class="mi">Ingeniería,</span></h2>
+  <h2 class="htitle mask" style="color:transparent;-webkit-text-stroke:1.5px var(--paper)"><span class="mi">negocio & ejecución</span></h2>
+  <div class="about">
+    <div class="lead">Mi enfoque combina experiencia técnica en data engineering, cloud, automatización e <b>inteligencia artificial</b> con visión de negocio. No construyo tecnología por construir: diseño sistemas que <b>reducen fricción, mejoran decisiones y habilitan crecimiento.</b></div>
+    <div class="caps">
+      <div class="c" data-h>Data Engineering</div><div class="c" data-h>AWS & Cloud</div><div class="c" data-h>ETL / ELT</div><div class="c" data-h>Warehouses</div><div class="c" data-h>Automatización</div><div class="c" data-h>AI Workflows</div><div class="c" data-h>Consulting</div><div class="c" data-h>Emprendedor</div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="servicios">
+  <div class="idx">02 / SERVICIOS</div>
+  <div class="svc">
+    <div class="srow" data-h><div class="n">(01)</div><h3>Data Engineering & Cloud</h3><p>Diseño e implementación de pipelines, data lakes, data warehouses y arquitecturas escalables en AWS.</p></div>
+    <div class="srow" data-h><div class="n">(02)</div><h3>Dashboards & Analytics</h3><p>Transformo datos dispersos en métricas claras para dirección, finanzas, operaciones y ventas.</p></div>
+    <div class="srow" data-h><div class="n">(03)</div><h3>AI Workflows & Automation</h3><p>Uso IA, agentes y automatización para optimizar procesos internos y acelerar equipos.</p></div>
+    <div class="srow" data-h><div class="n">(04)</div><h3>Data Strategy Consulting</h3><p>Defino una hoja de ruta realista para ordenar tus datos y convertirlos en ventaja competitiva.</p></div>
+  </div>
+</section>
+
+<section class="block" id="proceso">
+  <div class="idx">03 / PROCESO</div>
+  <h2 class="htitle mask"><span class="mi">Cómo trabajo</span></h2>
+  <div class="steps">
+    <div class="step"><div class="n">01</div><h4>Diagnóstico</h4><p>Entendemos el problema, las fuentes de datos y las prioridades del negocio.</p></div>
+    <div class="step"><div class="n">02</div><h4>Diseño</h4><p>Definimos una arquitectura simple, mantenible y alineada al presupuesto.</p></div>
+    <div class="step"><div class="n">03</div><h4>Implementación</h4><p>Construimos pipelines, modelos, dashboards o automatizaciones con foco en impacto.</p></div>
+    <div class="step"><div class="n">04</div><h4>Evolución</h4><p>Medimos resultados, documentamos y dejamos una base lista para crecer.</p></div>
+  </div>
+</section>
+
+<section class="block" id="stack">
+  <div class="idx">04 / STACK</div>
+  <div class="stk">
+    <div class="stkrow"><div class="l">Cloud</div><div class="t"><span>AWS</span><span>Lambda</span><span>Batch</span><span>S3</span><span>Redshift</span><span>Athena</span><span>Glue</span></div></div>
+    <div class="stkrow"><div class="l">Data</div><div class="t"><span>SQL</span><span>dbt</span><span>Python</span><span>Pandas</span><span>PyArrow</span></div></div>
+    <div class="stkrow"><div class="l">DevOps</div><div class="t"><span>Terraform</span><span>Docker</span><span>GitHub Actions</span></div></div>
+    <div class="stkrow"><div class="l">AI</div><div class="t"><span>LLMs</span><span>Prompt eng.</span><span>Agents</span><span>Automation</span></div></div>
+    <div class="stkrow"><div class="l">BI</div><div class="t"><span>Dashboards</span><span>Métricas</span><span>Executive reporting</span></div></div>
+  </div>
+</section>
+
+<section class="pos block">
+  <div class="idx">// EL PROBLEMA REAL</div>
+  <h2>No necesitas más herramientas.<br>Necesitas un <em>sistema</em> que funcione.</h2>
+  <p>Muchas empresas tienen datos, reportes y procesos dispersos. Mi trabajo es conectar las piezas: fuentes, modelos, automatización, dashboards e inteligencia artificial para que la operación sea más clara, rápida y medible.</p>
+</section>
+
+<section class="block">
+  <div class="idx">05 / EXPLORANDO</div>
+  <div class="proj">
+    <div class="p" data-h><div class="k">[ PYMES ]</div><h4>Consultoría de datos</h4><p>Soluciones accesibles para empresas que empiezan a ordenar su información.</p></div>
+    <div class="p" data-h><div class="k">[ TEAMS ]</div><h4>AI workflows</h4><p>Agentes y automatización que aceleran el trabajo de equipos técnicos.</p></div>
+    <div class="p" data-h><div class="k">[ HEALTH ]</div><h4>Telemedicina</h4><p>Productos digitales de salud con datos y automatización en el centro.</p></div>
+    <div class="p" data-h><div class="k">[ PRODUCT ]</div><h4>Productos de datos</h4><p>Herramientas internas que convierten procesos manuales en sistemas.</p></div>
+    <div class="p" data-h><div class="k">[ OPS ]</div><h4>BI para operaciones</h4><p>Métricas y tableros que hacen visible la operación en tiempo real.</p></div>
+    <div class="p" data-h><div class="k">[ +++ ]</div><h4>Y más</h4><p>Ideas en construcción. Data products, automatización y experimentos con IA.</p></div>
+  </div>
+</section>
+
+<section class="cta" id="contacto">
+  <div class="pr">$ ./contactar --juan</div>
+  <h2>HABLE<em>MOS</em></h2>
+  <p>¿Tienes datos, procesos o ideas que quieres convertir en algo real? Te ayudo a estructurar, automatizar o escalar tu operación con tecnología.</p>
+  <a href="mailto:juan@dominio.com" class="btn btn-p" data-h>Contactar a Juan →</a>
+</section>
+
+<footer>
+  <div>
+    <div class="brand">JUAN<br>PALOMINO</div>
+    <div class="role">Data Engineer & Entrepreneur · Guayaquil, Ecuador</div>
+  </div>
+  <div class="links">
+    <a href="mailto:juan@dominio.com" data-h rel="noopener">juan@dominio.com ↗</a>
+    <a href="https://github.com/juanjodevio" data-h rel="noopener noreferrer">github.com/juanjodevio ↗</a>
+    <a href="https://juanjodevio.github.io/" data-h rel="noopener">juanjodevio.github.io ↗</a>
+  </div>
+  <div class="copy">© 2026 JUAN PALOMINO · CONSTRUIDO CON DATOS, CÓDIGO Y CAFÉ.</div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d" crossorigin="anonymous"></script>
+<script>
+/* custom cursor */
+const cur=document.getElementById('cur');let cx=0,cy=0,tx=0,ty=0;
+addEventListener('mousemove',e=>{tx=e.clientX;ty=e.clientY});
+(function loop(){cx+=(tx-cx)*.18;cy+=(ty-cy)*.18;cur.style.transform=`translate(${cx-7}px,${cy-7}px)`;requestAnimationFrame(loop)})();
+document.querySelectorAll('[data-h]').forEach(el=>{el.addEventListener('mouseenter',()=>cur.classList.add('big'));el.addEventListener('mouseleave',()=>cur.classList.remove('big'))});
+
+window.addEventListener('load',()=>{
+  gsap.to('.hero .giant .l span',{y:0,duration:1.1,stagger:.14,ease:'expo.out',delay:.15});
+  gsap.utils.toArray('.mask').forEach(m=>{
+    gsap.to(m.querySelector('.mi'),{y:0,duration:1,ease:'expo.out',scrollTrigger:{trigger:m,start:'top 88%'}});
+  });
+  gsap.utils.toArray('.srow,.step,.stkrow,.proj .p,.about .lead,.about .caps').forEach(el=>{
+    gsap.from(el,{opacity:0,y:36,duration:.8,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 90%'}});
+  });
+  /* marquee reacts to scroll velocity */
+  let track=document.getElementById('track');
+  ScrollTrigger.create({trigger:document.body,start:'top top',end:'bottom bottom',onUpdate:s=>{gsap.to(track,{timeScale:1+Math.abs(s.getVelocity()/300),duration:.3,overwrite:true})}});
+});
+</script>
 </body>
-
 </html>
