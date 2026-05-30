@@ -46,8 +46,10 @@
 <style>
 :root{
   --bg:#0A0A0A; --paper:#F2EFE9; --ink:#0A0A0A;
-  --muted:#7A7568; --line:#2A2A28; --line-l:#D8D3C8;
+  --muted:#9A9588; --line:#2A2A28; --line-l:#D8D3C8;
   --accent:#E8FE5C; --accent2:#FF5C38;
+  --body-on-dark:#D4CFC4;
+  --z-cursor:200;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -57,29 +59,50 @@ body,a,button,.btn,[data-h],nav,.srow,.stkrow .t span,.about .caps .c{cursor:non
 ::selection{background:var(--accent);color:#0A0A0A}
 
 /* custom cursor */
-.cursor{position:fixed;width:14px;height:14px;border-radius:50%;background:var(--accent);z-index:9999;pointer-events:none;mix-blend-mode:difference;transition:transform .25s ease,width .25s,height .25s}
-.cursor.big{width:64px;height:64px;background:var(--accent2)}
-@media(max-width:760px){body,a,button,.btn,[data-h],nav,.srow{cursor:auto}.cursor{display:none}}
-@media(hover:none){body,a,button,.btn,[data-h]{cursor:auto}.cursor{display:none}}
+.cursor{position:fixed;left:0;top:0;width:14px;height:14px;border-radius:50%;background:var(--accent);z-index:var(--z-cursor);pointer-events:none;mix-blend-mode:difference;transform:translate(-50%,-50%) scale(1);opacity:0;visibility:hidden;transition:transform .12s cubic-bezier(.22,1,.36,1),background .12s ease,opacity .15s ease}
+.cursor.is-visible{opacity:1;visibility:visible}
+.cursor.big{transform:translate(-50%,-50%) scale(4.5);background:var(--accent2)}
+@media(max-width:760px){body,a,button,.btn,[data-h],nav,.srow,.stkrow .t span,.about .caps .c{cursor:auto}.cursor{display:none}}
+@media(hover:none){body,a,button,.btn,[data-h],nav,.srow{cursor:auto}.cursor{display:none}}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .marquee .track{animation:none}
+  .giant .l span,.mask .mi,.srow,.step,.stkrow,.proj .p,.about .lead,.about .caps{opacity:1!important;transform:none!important}
+}
 
 /* nav */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:24px 40px;mix-blend-mode:difference}
-nav .brand{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:14px;letter-spacing:0}
-nav .meta{font-family:'JetBrains Mono',monospace;font-size:12px;display:flex;gap:24px}
-nav .meta span{opacity:.6}
-@media(max-width:620px){nav .meta span:not(.t){display:none}nav{padding:18px 24px}}
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:18px 40px;
+  font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1;
+  color:var(--paper);
+  background:linear-gradient(180deg,rgba(10,10,10,.92) 0%,rgba(10,10,10,0) 100%);
+  pointer-events:none;
+}
+nav .brand,nav .meta{pointer-events:auto}
+nav .brand{font-weight:600;font-size:12px;letter-spacing:.04em;text-transform:uppercase}
+nav .meta{display:flex;align-items:center;gap:20px;font-weight:500}
+nav .meta span{color:var(--body-on-dark)}
+nav .meta .t{color:var(--accent);opacity:1}
+nav.on-light{color:var(--ink);background:linear-gradient(180deg,rgba(242,239,233,.94) 0%,rgba(242,239,233,0) 100%)}
+nav.on-light .meta span{color:#3A372E}
+nav.on-light .meta .t{color:var(--accent2)}
+@media(max-width:760px){nav{padding:16px 24px}}
+@media(max-width:620px){nav .meta span:not(.t){display:none}}
 
 /* hero */
 .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:120px 40px 40px;position:relative}
 .hero .top{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--accent);letter-spacing:1px;margin-bottom:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;border-bottom:1px solid var(--line);padding-bottom:16px}
 .giant{font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;line-height:.82;letter-spacing:-.01em}
 .giant .l{display:block;overflow:hidden}
-.giant .l span{display:block;transform:translateY(110%)}
-.hero .r1{font-size:clamp(54px,15vw,230px)}
-.hero .r2{font-size:clamp(54px,15vw,230px);color:transparent;-webkit-text-stroke:2px var(--paper);display:flex;align-items:baseline;gap:.2em}
-.hero .r2 em{font-style:normal;-webkit-text-stroke:0;color:var(--accent);font-size:.32em;font-family:'Archivo',sans-serif;font-weight:700;text-transform:none;letter-spacing:-.02em;transform:translateY(-.3em)}
+.giant .l span{display:block;transform:translateY(0)}
+.giant,.htitle,.cta h2{text-wrap:balance}
+.hero .r1{font-size:clamp(2.75rem,11vw,6rem)}
+.hero .r2{font-size:clamp(2.75rem,11vw,6rem);color:transparent;-webkit-text-stroke:2px var(--paper);display:flex;align-items:baseline;gap:.2em;flex-wrap:wrap}
+.hero .r2 em{font-style:normal;-webkit-text-stroke:0;color:var(--accent);font-size:.38em;font-family:'Archivo',sans-serif;font-weight:700;text-transform:none;letter-spacing:-.02em;transform:translateY(-.25em)}
 .hero .bottom{display:flex;justify-content:space-between;align-items:flex-end;margin-top:40px;flex-wrap:wrap;gap:28px}
-.hero .bottom p{max-width:440px;font-size:17px;line-height:1.55;color:#C9C4B8}
+.hero .bottom p{max-width:44ch;font-size:17px;line-height:1.55;color:var(--body-on-dark)}
 .hero .bottom .actions{display:flex;gap:14px;flex-wrap:wrap}
 .btn{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;padding:15px 24px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;border-radius:100px;transition:transform .3s}
 .btn-p{background:var(--accent);color:#0A0A0A}
@@ -100,7 +123,7 @@ nav .meta span{opacity:.6}
 .idx{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--accent);letter-spacing:1px;display:flex;align-items:center;gap:14px;margin-bottom:36px}
 .idx::after{content:"";flex:1;height:1px;background:var(--line)}
 .htitle{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:clamp(36px,7vw,96px);line-height:.92;letter-spacing:-.005em}
-.mask{overflow:hidden}.mask .mi{display:block;transform:translateY(105%)}
+.mask{overflow:hidden}.mask .mi{display:block;transform:translateY(0)}
 
 /* about */
 .about{display:grid;grid-template-columns:1.1fr 1fr;gap:60px;margin-top:48px;align-items:start}
@@ -108,13 +131,13 @@ nav .meta span{opacity:.6}
 .about .lead{font-size:clamp(20px,2.4vw,30px);line-height:1.35;font-weight:500;letter-spacing:-.01em}
 .about .lead b{color:var(--accent)}
 .about .caps{display:flex;flex-wrap:wrap;gap:10px;align-content:start}
-.about .caps .c{font-family:'JetBrains Mono',monospace;font-size:13px;padding:10px 16px;border:1px solid var(--line);border-radius:100px;color:#C9C4B8;transition:.3s}
+.about .caps .c{font-family:'JetBrains Mono',monospace;font-size:13px;padding:10px 16px;border:1px solid var(--line);border-radius:100px;color:var(--body-on-dark);transition:background .3s,color .3s,border-color .3s}
 .about .caps .c:hover{background:var(--accent);color:#0A0A0A;border-color:var(--accent)}
 
 /* services — broken grid */
 .svc{margin-top:24px}
-.srow{display:grid;grid-template-columns:80px 1fr 360px;gap:32px;align-items:center;padding:40px 0;border-top:1px solid var(--line);transition:padding .4s}
-.srow:hover{padding-left:24px}
+.srow{display:grid;grid-template-columns:80px 1fr 360px;gap:32px;align-items:center;padding:40px 0;border-top:1px solid var(--line);transition:transform .4s ease}
+.srow:hover{transform:translateX(12px)}
 .srow:last-child{border-bottom:1px solid var(--line)}
 .srow .n{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--accent)}
 .srow h3{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:clamp(28px,4vw,56px);line-height:.95;letter-spacing:-.01em;transition:.4s}
@@ -138,7 +161,7 @@ nav .meta span{opacity:.6}
 .stkrow:last-child{border-bottom:1px solid var(--line)}
 .stkrow .l{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:28px;letter-spacing:.01em}
 .stkrow .t{display:flex;flex-wrap:wrap;gap:10px}
-.stkrow .t span{font-family:'JetBrains Mono',monospace;font-size:14px;padding:8px 15px;border:1px solid var(--line);color:#C9C4B8;transition:.3s}
+.stkrow .t span{font-family:'JetBrains Mono',monospace;font-size:14px;padding:8px 15px;border:1px solid var(--line);color:var(--body-on-dark);transition:background .3s,color .3s}
 .stkrow .t span:hover{background:var(--paper);color:#0A0A0A}
 @media(max-width:620px){.stkrow{grid-template-columns:1fr;gap:14px}}
 
@@ -162,9 +185,9 @@ nav .meta span{opacity:.6}
 /* cta */
 .cta{padding:160px 40px;text-align:center;border:none}
 .cta .pr{font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:14px;margin-bottom:28px}
-.cta h2{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:clamp(40px,9vw,150px);line-height:.85;letter-spacing:-.01em}
+.cta h2{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:clamp(2.5rem,9vw,6rem);line-height:.88;letter-spacing:-.02em}
 .cta h2 em{font-style:normal;color:transparent;-webkit-text-stroke:2px var(--paper)}
-.cta p{max-width:540px;margin:32px auto 0;font-size:18px;line-height:1.55;color:#C9C4B8}
+.cta p{max-width:44ch;margin:32px auto 0;font-size:18px;line-height:1.55;color:var(--body-on-dark)}
 .cta .btn{margin-top:40px;font-size:15px;padding:18px 32px}
 
 /* footer */
@@ -206,7 +229,7 @@ footer .copy{width:100%;font-family:'JetBrains Mono',monospace;font-size:12px;co
 </div></div>
 
 <section class="block" id="sobre">
-  <div class="idx">01 / SOBRE MÍ</div>
+  <div class="idx">Sobre mí</div>
   <h2 class="htitle mask"><span class="mi">Ingeniería,</span></h2>
   <h2 class="htitle mask" style="color:transparent;-webkit-text-stroke:1.5px var(--paper)"><span class="mi">negocio & ejecución</span></h2>
   <div class="about">
@@ -218,7 +241,7 @@ footer .copy{width:100%;font-family:'JetBrains Mono',monospace;font-size:12px;co
 </section>
 
 <section class="block" id="servicios">
-  <div class="idx">02 / SERVICIOS</div>
+  <div class="idx">Servicios</div>
   <div class="svc">
     <div class="srow" data-h><div class="n">(01)</div><h3>Data Engineering & Cloud</h3><p>Diseño e implementación de pipelines, data lakes, data warehouses y arquitecturas escalables en AWS.</p></div>
     <div class="srow" data-h><div class="n">(02)</div><h3>Dashboards & Analytics</h3><p>Transformo datos dispersos en métricas claras para dirección, finanzas, operaciones y ventas.</p></div>
@@ -228,7 +251,7 @@ footer .copy{width:100%;font-family:'JetBrains Mono',monospace;font-size:12px;co
 </section>
 
 <section class="block" id="proceso">
-  <div class="idx">03 / PROCESO</div>
+  <div class="idx">Proceso</div>
   <h2 class="htitle mask"><span class="mi">Cómo trabajo</span></h2>
   <div class="steps">
     <div class="step"><div class="n">01</div><h4>Diagnóstico</h4><p>Entendemos el problema, las fuentes de datos y las prioridades del negocio.</p></div>
@@ -239,7 +262,7 @@ footer .copy{width:100%;font-family:'JetBrains Mono',monospace;font-size:12px;co
 </section>
 
 <section class="block" id="stack">
-  <div class="idx">04 / STACK</div>
+  <div class="idx">Stack</div>
   <div class="stk">
     <div class="stkrow"><div class="l">Cloud</div><div class="t"><span>AWS</span><span>Lambda</span><span>Batch</span><span>S3</span><span>Redshift</span><span>Athena</span><span>Glue</span></div></div>
     <div class="stkrow"><div class="l">Data</div><div class="t"><span>SQL</span><span>dbt</span><span>Python</span><span>Pandas</span><span>PyArrow</span></div></div>
@@ -250,13 +273,13 @@ footer .copy{width:100%;font-family:'JetBrains Mono',monospace;font-size:12px;co
 </section>
 
 <section class="pos block">
-  <div class="idx">// EL PROBLEMA REAL</div>
+  <div class="idx">El problema real</div>
   <h2>No necesitas más herramientas.<br>Necesitas un <em>sistema</em> que funcione.</h2>
   <p>Muchas empresas tienen datos, reportes y procesos dispersos. Mi trabajo es conectar las piezas: fuentes, modelos, automatización, dashboards e inteligencia artificial para que la operación sea más clara, rápida y medible.</p>
 </section>
 
 <section class="block">
-  <div class="idx">05 / EXPLORANDO</div>
+  <div class="idx">Explorando</div>
   <div class="proj">
     <div class="p" data-h><div class="k">[ PYMES ]</div><h4>Consultoría de datos</h4><p>Soluciones accesibles para empresas que empiezan a ordenar su información.</p></div>
     <div class="p" data-h><div class="k">[ TEAMS ]</div><h4>AI workflows</h4><p>Agentes y automatización que aceleran el trabajo de equipos técnicos.</p></div>
@@ -291,22 +314,51 @@ footer .copy{width:100%;font-family:'JetBrains Mono',monospace;font-size:12px;co
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d" crossorigin="anonymous"></script>
 <script>
 /* custom cursor */
-const cur=document.getElementById('cur');let cx=0,cy=0,tx=0,ty=0;
-addEventListener('mousemove',e=>{tx=e.clientX;ty=e.clientY});
-(function loop(){cx+=(tx-cx)*.18;cy+=(ty-cy)*.18;cur.style.transform=`translate(${cx-7}px,${cy-7}px)`;requestAnimationFrame(loop)})();
-document.querySelectorAll('[data-h]').forEach(el=>{el.addEventListener('mouseenter',()=>cur.classList.add('big'));el.addEventListener('mouseleave',()=>cur.classList.remove('big'))});
+const cur=document.getElementById('cur');
+const motionOk=!window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(cur&&motionOk){
+  let cx=0,cy=0,tx=0,ty=0,visible=false;
+  const show=e=>{tx=e.clientX;ty=e.clientY;if(!visible){cx=tx;cy=ty;cur.classList.add('is-visible');visible=true}};
+  addEventListener('mousemove',show,{passive:true});
+  addEventListener('mouseleave',()=>{cur.classList.remove('is-visible');visible=false},{passive:true});
+  (function loop(){
+    if(visible){
+      cx+=(tx-cx)*.72;
+      cy+=(ty-cy)*.72;
+      cur.style.left=`${cx}px`;
+      cur.style.top=`${cy}px`;
+    }
+    requestAnimationFrame(loop);
+  })();
+  document.querySelectorAll('[data-h]').forEach(el=>{
+    el.addEventListener('mouseenter',()=>cur.classList.add('big'));
+    el.addEventListener('mouseleave',()=>cur.classList.remove('big'));
+  });
+}
+
+const navEl=document.querySelector('nav');
+const posEl=document.querySelector('.pos');
+if(navEl&&posEl&&'IntersectionObserver' in window){
+  new IntersectionObserver(([e])=>navEl.classList.toggle('on-light',e.isIntersecting),{
+    rootMargin:'-56px 0px -70% 0px',threshold:0
+  }).observe(posEl);
+}
 
 window.addEventListener('load',()=>{
-  gsap.to('.hero .giant .l span',{y:0,duration:1.1,stagger:.14,ease:'expo.out',delay:.15});
-  gsap.utils.toArray('.mask').forEach(m=>{
-    gsap.to(m.querySelector('.mi'),{y:0,duration:1,ease:'expo.out',scrollTrigger:{trigger:m,start:'top 88%'}});
+  if(!motionOk||typeof gsap==='undefined') return;
+  gsap.from('.hero .giant .l span',{y:'110%',duration:1.1,stagger:.14,ease:'expo.out',delay:.15});
+  gsap.utils.toArray('.mask .mi').forEach(mi=>{
+    gsap.from(mi,{y:'105%',duration:1,ease:'expo.out',scrollTrigger:{trigger:mi.closest('.mask'),start:'top 88%'}});
   });
   gsap.utils.toArray('.srow,.step,.stkrow,.proj .p,.about .lead,.about .caps').forEach(el=>{
     gsap.from(el,{opacity:0,y:36,duration:.8,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 90%'}});
   });
-  /* marquee reacts to scroll velocity */
-  let track=document.getElementById('track');
-  ScrollTrigger.create({trigger:document.body,start:'top top',end:'bottom bottom',onUpdate:s=>{gsap.to(track,{timeScale:1+Math.abs(s.getVelocity()/300),duration:.3,overwrite:true})}});
+  const track=document.getElementById('track');
+  if(track&&typeof ScrollTrigger!=='undefined'){
+    ScrollTrigger.create({trigger:document.body,start:'top top',end:'bottom bottom',onUpdate:s=>{
+      gsap.to(track,{timeScale:1+Math.abs(s.getVelocity()/300),duration:.3,overwrite:true});
+    }});
+  }
 });
 </script>
 </body>
