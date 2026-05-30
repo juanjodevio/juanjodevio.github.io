@@ -52,6 +52,8 @@ grep -q 'disableCustomCursor' js/main.js || fail 'js must disable custom cursor 
 if grep -q 'opacity:\s*0' js/main.js; then
   fail 'scroll reveals must not gate visibility with opacity:0 (use transform only)'
 fi
+grep -q 'immediateRender:\s*false' js/main.js || fail 'scroll reveals must use immediateRender:false'
+grep -q 'js-motion' js/main.js || fail 'js must toggle html.js-motion when motion initializes'
 ok "js guardrails passed"
 
 # --- static HTTP smoke (served from repo root) ---

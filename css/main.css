@@ -42,6 +42,15 @@ nav.on-light a:focus-visible{outline-color:var(--accent2)}
 body:not(.custom-cursor) .cursor{display:none}
 @media(max-width:760px){.cursor{display:none}}
 @media(hover:none){.cursor{display:none}}
+/* Visible by default; GSAP only moves elements when .js-motion is set */
+html:not(.js-motion) .giant .l span,
+html:not(.js-motion) .mask .mi,
+html:not(.js-motion) .srow,
+html:not(.js-motion) .step,
+html:not(.js-motion) .stkrow,
+html:not(.js-motion) .proj .p,
+html:not(.js-motion) .about .lead,
+html:not(.js-motion) .about .caps{opacity:1!important;transform:none!important}
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .marquee .track{animation:none}

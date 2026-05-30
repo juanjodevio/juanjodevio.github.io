@@ -1,6 +1,7 @@
 const cur = document.getElementById('cur');
 const motionMq = window.matchMedia('(prefers-reduced-motion: reduce)');
 const fineMq = window.matchMedia('(pointer: fine)');
+const motionOk = !motionMq.matches;
 
 function canUseCustomCursor() {
   return cur && !motionMq.matches && fineMq.matches && window.innerWidth > 760;
@@ -71,38 +72,65 @@ if (navEl && posEl && 'IntersectionObserver' in window) {
   }).observe(posEl);
 }
 
+function revealOnScroll(el, fromVars, toVars, scrollTrigger) {
+  gsap.fromTo(el, fromVars, {
+    ...toVars,
+    immediateRender: false,
+    scrollTrigger
+  });
+}
+
 window.addEventListener('load', () => {
   if (!motionOk || typeof gsap === 'undefined') return;
-  gsap.from('.hero .giant .l span', { y: '110%', duration: 1.1, stagger: 0.14, ease: 'expo.out', delay: 0.15 });
-  gsap.utils.toArray('.mask .mi').forEach((mi) => {
-    gsap.from(mi, {
-      y: '105%',
-      duration: 1,
-      ease: 'expo.out',
-      scrollTrigger: { trigger: mi.closest('.mask'), start: 'top 88%' }
+
+  const root = document.documentElement;
+  if (typeof ScrollTrigger !== 'undefined') gsap.registerPlugin(ScrollTrigger);
+
+  try {
+    root.classList.add('js-motion');
+
+    // Hero: intentional load reveal (GSAP absent → CSS keeps copy visible)
+    gsap.fromTo(
+      '.hero .giant .l span',
+      { y: '110%' },
+      { y: 0, duration: 1.1, stagger: 0.14, ease: 'expo.out', delay: 0.15 }
+    );
+
+    gsap.utils.toArray('.mask .mi').forEach((mi) => {
+      revealOnScroll(
+        mi,
+        { y: '105%' },
+        { y: 0, duration: 1, ease: 'expo.out' },
+        { trigger: mi.closest('.mask'), start: 'top 88%', once: true }
+      );
     });
-  });
-  gsap.utils.toArray('.srow,.step,.stkrow,.proj .p,.about .lead,.about .caps').forEach((el) => {
-    gsap.from(el, {
-      y: 36,
-      duration: 0.8,
-      ease: 'power3.out',
-      scrollTrigger: { trigger: el, start: 'top 90%', once: true }
+
+    gsap.utils.toArray('.srow,.step,.stkrow,.proj .p,.about .lead,.about .caps').forEach((el) => {
+      revealOnScroll(
+        el,
+        { y: 36 },
+        { y: 0, duration: 0.8, ease: 'power3.out' },
+        { trigger: el, start: 'top 90%', once: true }
+      );
     });
-  });
-  const track = document.getElementById('track');
-  if (track && typeof ScrollTrigger !== 'undefined') {
-    ScrollTrigger.create({
-      trigger: document.body,
-      start: 'top top',
-      end: 'bottom bottom',
-      onUpdate: (s) => {
-        gsap.to(track, {
-          timeScale: 1 + Math.abs(s.getVelocity() / 300),
-          duration: 0.3,
-          overwrite: true
-        });
-      }
-    });
+
+    const track = document.getElementById('track');
+    if (track && typeof ScrollTrigger !== 'undefined') {
+      ScrollTrigger.create({
+        trigger: document.body,
+        start: 'top top',
+        end: 'bottom bottom',
+        onUpdate: (s) => {
+          gsap.to(track, {
+            timeScale: 1 + Math.abs(s.getVelocity() / 300),
+            duration: 0.3,
+            overwrite: true
+          });
+        }
+      });
+    }
+  } catch (err) {
+    root.classList.remove('js-motion');
+    console.error('motion init failed', err);
   }
 });
