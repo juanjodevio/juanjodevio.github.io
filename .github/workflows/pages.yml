@@ -27,7 +27,7 @@ jobs:
       - name: Prepare site artifact
         run: |
           mkdir -p _site
-          cp index.html favicon.svg og-image.svg CNAME _site/
+          cp -r index.html favicon.svg og-image.svg CNAME css js _site/
           touch _site/.nojekyll
 
       - name: Configure Pages
