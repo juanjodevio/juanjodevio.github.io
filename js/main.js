@@ -1,9 +1,28 @@
 const cur = document.getElementById('cur');
-const motionOk = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const motionMq = window.matchMedia('(prefers-reduced-motion: reduce)');
+const fineMq = window.matchMedia('(pointer: fine)');
 
-if (cur && motionOk) {
+function canUseCustomCursor() {
+  return cur && !motionMq.matches && fineMq.matches && window.innerWidth > 760;
+}
+
+if (cur && !motionMq.matches) {
   let cx = 0, cy = 0, tx = 0, ty = 0, visible = false;
+
+  function enableCustomCursor() {
+    if (!canUseCustomCursor()) return;
+    document.body.classList.add('custom-cursor');
+  }
+
+  function disableCustomCursor() {
+    document.body.classList.remove('custom-cursor');
+    cur.classList.remove('is-visible', 'big');
+    visible = false;
+  }
+
   const show = (e) => {
+    if (!canUseCustomCursor()) return;
+    enableCustomCursor();
     tx = e.clientX;
     ty = e.clientY;
     if (!visible) {
@@ -13,13 +32,20 @@ if (cur && motionOk) {
       visible = true;
     }
   };
+
   addEventListener('mousemove', show, { passive: true });
-  addEventListener('mouseleave', () => {
-    cur.classList.remove('is-visible');
-    visible = false;
-  }, { passive: true });
+  addEventListener('mouseleave', disableCustomCursor, { passive: true });
+
+  addEventListener('keydown', (e) => {
+    if (e.key === 'Tab') disableCustomCursor();
+  });
+
+  addEventListener('mousedown', () => {
+    if (canUseCustomCursor()) enableCustomCursor();
+  });
+
   (function loop() {
-    if (visible) {
+    if (visible && document.body.classList.contains('custom-cursor')) {
       cx += (tx - cx) * 0.72;
       cy += (ty - cy) * 0.72;
       cur.style.left = `${cx}px`;
@@ -27,8 +53,11 @@ if (cur && motionOk) {
     }
     requestAnimationFrame(loop);
   })();
+
   document.querySelectorAll('[data-h]').forEach((el) => {
-    el.addEventListener('mouseenter', () => cur.classList.add('big'));
+    el.addEventListener('mouseenter', () => {
+      if (document.body.classList.contains('custom-cursor')) cur.classList.add('big');
+    });
     el.addEventListener('mouseleave', () => cur.classList.remove('big'));
   });
 }
@@ -55,11 +84,10 @@ window.addEventListener('load', () => {
   });
   gsap.utils.toArray('.srow,.step,.stkrow,.proj .p,.about .lead,.about .caps').forEach((el) => {
     gsap.from(el, {
-      opacity: 0,
       y: 36,
       duration: 0.8,
       ease: 'power3.out',
-      scrollTrigger: { trigger: el, start: 'top 90%' }
+      scrollTrigger: { trigger: el, start: 'top 90%', once: true }
     });
   });
   const track = document.getElementById('track');
