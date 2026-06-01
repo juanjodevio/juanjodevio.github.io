@@ -92,9 +92,9 @@ nav.on-light .nav-links a:hover .nav-prompt{color:var(--accent2)}
 .giant .l span{display:block;transform:translateY(0)}
 .giant,.htitle,.cta h2{text-wrap:balance}
 .hero .giant{display:flex;flex-direction:column;align-items:flex-start;gap:clamp(6px,.55vw,14px);line-height:.9}
-.hero .r1{font-size:clamp(2.75rem,11vw,6rem)}
-.hero .r2{font-size:clamp(2.75rem,11vw,6rem);color:transparent;-webkit-text-stroke:1px var(--paper);paint-order:stroke fill;display:flex;align-items:baseline;gap:.2em;flex-wrap:wrap}
-.hero .r2 em{font-style:normal;color:var(--accent);font-size:.38em;font-family:'Archivo',sans-serif;font-weight:500;text-transform:none;letter-spacing:-.02em;transform:translateY(-.25em)}
+.hero .r1{font-size:clamp(2.5rem,10vw,6rem)}
+.hero .r2{font-size:clamp(2.75rem,11vw,6rem);color:transparent;-webkit-text-stroke:1px var(--paper);paint-order:stroke fill}
+@media(min-width:768px){.hero .r2{-webkit-text-stroke:.75px var(--paper)}}
 .hero .bottom{display:flex;justify-content:space-between;align-items:flex-end;margin-top:40px;flex-wrap:wrap;gap:28px}
 .hero .bottom p{max-width:44ch;font-size:17px;line-height:1.55;color:var(--body-on-dark)}
 .hero .bottom .actions{display:flex;gap:14px;flex-wrap:wrap}

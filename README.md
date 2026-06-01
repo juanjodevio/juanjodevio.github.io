@@ -1,6 +1,6 @@
 # juanjodevio.github.io
 
-Sitio personal de Juan Palomino — Data Engineer.
+Sitio personal de Juan Palomino — Data + AI Engineer.
 
 **Live:** [juanjodev.io](https://juanjodev.io/)
 
