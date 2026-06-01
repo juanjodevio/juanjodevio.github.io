@@ -35,7 +35,9 @@ grep -q 'me@juanjodev.io' index.html || fail 'index.html must use production ema
 grep -q 'class="skip-link"' index.html || fail 'missing skip link'
 grep -q 'id="contenido"' index.html || fail 'missing main#contenido landmark'
 grep -q 'href="#contacto"' index.html || fail 'missing #contacto anchor'
+grep -q 'href="#sobre"' index.html || fail 'missing #sobre anchor'
 grep -q 'href="#servicios"' index.html || fail 'missing #servicios anchor'
+grep -q 'class="nav-links"' index.html || fail 'missing nav section links'
 ok "index.html wiring checks passed"
 
 # --- CSS a11y guardrails ---

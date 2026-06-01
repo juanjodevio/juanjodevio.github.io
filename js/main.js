@@ -45,6 +45,14 @@ if (cur && !motionMq.matches) {
     if (canUseCustomCursor()) enableCustomCursor();
   });
 
+  addEventListener(
+    'resize',
+    () => {
+      if (!canUseCustomCursor()) disableCustomCursor();
+    },
+    { passive: true }
+  );
+
   (function loop() {
     if (visible && document.body.classList.contains('custom-cursor')) {
       cx += (tx - cx) * 0.72;
