@@ -2,7 +2,16 @@
 
 Portfolio personal de [Juan Palomino](https://juanjodev.io): **Data + AI Engineer** en Ecuador y LATAM. Sitio estático, una sola página, orientado a posicionamiento y contacto directo.
 
-**En vivo:** [https://juanjodev.io](https://juanjodev.io/)
+**En vivo:** [https://juanjodev.io](https://juanjodev.io/) (español) · [https://juanjodev.io/en/](https://juanjodev.io/en/) (English)
+
+## Idiomas
+
+| Ruta | Archivo | Idioma |
+|------|---------|--------|
+| `/` | `index.html` | Español (por defecto, `hreflang` x-default) |
+| `/en/` | `en/index.html` | Inglés |
+
+Cada página incluye `hreflang`, `canonical` propio y un switch en el nav (`$ lang en` / `$ lang es`). Misma estructura, IDs de sección (`#sobre`, `#servicios`, `#contacto`) y assets en `/css` y `/js`.
 
 ## Stack
 
@@ -20,7 +29,8 @@ Sin bundler, framework ni dependencias npm en runtime.
 ## Estructura del repo
 
 ```
-├── index.html          # Página única
+├── index.html          # Español (/)
+├── en/index.html       # English (/en/)
 ├── css/main.css        # Estilos
 ├── js/main.js          # Cursor, nav en paper, reveals GSAP
 ├── favicon.svg
@@ -44,7 +54,9 @@ python -m http.server 8765
 npx --yes serve -p 8765
 ```
 
-Abre [http://127.0.0.1:8765](http://127.0.0.1:8765).
+Abre [http://127.0.0.1:8765/](http://127.0.0.1:8765/) o [http://127.0.0.1:8765/en/](http://127.0.0.1:8765/en/).
+
+También puedes abrir `index.html` o `en/index.html` con doble clic: los assets usan rutas relativas (`css/`, `js/`, `en/`). GSAP sigue requiriendo internet.
 
 GSAP se carga desde CDN; hace falta conexión a internet para animaciones y marquee acelerado por scroll.
 
@@ -61,9 +73,10 @@ El script comprueba:
 - Archivos que GitHub Pages copia en el deploy
 - Enlaces y anclas (`#sobre`, `#servicios`, `#contacto`)
 - Guardrails de accesibilidad (`:focus-visible`, cursor custom acotado, contenido visible sin JS)
-- Smoke HTTP de `index.html`, `css/main.css` y `js/main.js`
+- Smoke HTTP de `/`, `/en/`, `css/main.css` y `js/main.js`
+- `hreflang` y enlaces de cambio de idioma en ambas páginas
 
-En CI también corre `html-validate` sobre `index.html` (ver workflow).
+En CI también corre `html-validate` sobre `index.html` y `en/index.html` (ver workflow).
 
 ## Deploy
 

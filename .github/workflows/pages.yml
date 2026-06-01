@@ -27,7 +27,7 @@ jobs:
         run: bash scripts/validate.sh
 
       - name: HTML validation
-        run: npx --yes html-validate@10.0.0 index.html
+        run: npx --yes html-validate@10.0.0 index.html en/index.html
 
   deploy:
     needs: validate
@@ -43,7 +43,7 @@ jobs:
       - name: Prepare site artifact
         run: |
           mkdir -p _site
-          cp -r index.html favicon.svg og-image.svg CNAME css js _site/
+          cp -r index.html favicon.svg og-image.svg CNAME css js en _site/
           touch _site/.nojekyll
 
       - name: Configure Pages

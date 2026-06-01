@@ -14,9 +14,33 @@ ok() {
   echo "validate: $*"
 }
 
+check_html_page() {
+  local file="$1"
+  local css_href="$2"
+  local js_src="$3"
+  local lang_href="$4"
+
+  grep -q "href=\"${css_href}\"" "$file" || fail "${file} must link ${css_href}"
+  grep -q "src=\"${js_src}\"" "$file" || fail "${file} must load ${js_src}"
+  grep -q 'me@juanjodev.io' "$file" || fail "${file} must use production email"
+  grep -q 'class="skip-link"' "$file" || fail "${file} missing skip link"
+  grep -q 'id="contenido"' "$file" || fail "${file} missing main#contenido landmark"
+  grep -q 'href="#contacto"' "$file" || fail "${file} missing #contacto anchor"
+  grep -q 'href="#sobre"' "$file" || fail "${file} missing #sobre anchor"
+  grep -q 'href="#servicios"' "$file" || fail "${file} missing #servicios anchor"
+  grep -q 'class="nav-links"' "$file" || fail "${file} missing nav section links"
+  grep -q 'hreflang="es"' "$file" || fail "${file} missing hreflang es"
+  grep -q 'hreflang="en"' "$file" || fail "${file} missing hreflang en"
+  grep -q 'class="nav-lang"' "$file" || fail "${file} missing language dropdown"
+  grep -q 'nav-lang-menu' "$file" || fail "${file} missing language menu"
+  grep -q "${lang_href}" "$file" || fail "${file} missing alternate language link"
+  ok "${file} wiring checks passed"
+}
+
 # --- deploy artifact must match pages.yml copy list ---
 REQUIRED=(
   index.html
+  en/index.html
   favicon.svg
   og-image.svg
   CNAME
@@ -28,17 +52,8 @@ for f in "${REQUIRED[@]}"; do
 done
 ok "all deploy artifacts present"
 
-# --- HTML wiring ---
-grep -q 'href="css/main.css"' index.html || fail 'index.html must link css/main.css'
-grep -q 'src="js/main.js"' index.html || fail 'index.html must load js/main.js'
-grep -q 'me@juanjodev.io' index.html || fail 'index.html must use production email'
-grep -q 'class="skip-link"' index.html || fail 'missing skip link'
-grep -q 'id="contenido"' index.html || fail 'missing main#contenido landmark'
-grep -q 'href="#contacto"' index.html || fail 'missing #contacto anchor'
-grep -q 'href="#sobre"' index.html || fail 'missing #sobre anchor'
-grep -q 'href="#servicios"' index.html || fail 'missing #servicios anchor'
-grep -q 'class="nav-links"' index.html || fail 'missing nav section links'
-ok "index.html wiring checks passed"
+check_html_page "index.html" "css/main.css" "js/main.js" 'href="en/"'
+check_html_page "en/index.html" "../css/main.css" "../js/main.js" 'href="../"'
 
 # --- CSS a11y guardrails ---
 grep -q ':focus-visible' css/main.css || fail 'css must define :focus-visible styles'
@@ -86,10 +101,19 @@ const types = {
   '.js': 'application/javascript; charset=utf-8',
   '.svg': 'image/svg+xml',
 };
+function resolvePath(urlPath) {
+  let p = urlPath === '/' ? '/index.html' : urlPath;
+  if (p.endsWith('/')) p += 'index.html';
+  const filePath = path.join(root, p);
+  if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
+    return path.join(filePath, 'index.html');
+  }
+  return filePath;
+}
 http
   .createServer((req, res) => {
     const urlPath = decodeURIComponent((req.url || '/').split('?')[0]);
-    let filePath = path.join(root, urlPath === '/' ? 'index.html' : urlPath);
+    const filePath = resolvePath(urlPath);
     if (!fs.existsSync(filePath) || fs.statSync(filePath).isDirectory()) {
       res.writeHead(404);
       res.end();
@@ -119,7 +143,7 @@ for _ in $(seq 1 20); do
 done
 [[ "$ready" -eq 1 ]] || fail "local HTTP server did not start on port ${PORT}"
 
-for path in / /css/main.css /js/main.js; do
+for path in / /en/ /en/index.html /css/main.css /js/main.js; do
   code="$(curl -s -o /dev/null -w '%{http_code}' "${base}${path}")"
   [[ "$code" == "200" ]] || fail "GET ${path} returned HTTP ${code}, expected 200"
 done

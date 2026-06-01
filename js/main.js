@@ -80,6 +80,16 @@ if (navEl && posEl && 'IntersectionObserver' in window) {
   }).observe(posEl);
 }
 
+const langDetails = document.querySelector('.nav-lang');
+if (langDetails) {
+  document.addEventListener('click', (e) => {
+    if (langDetails.open && !langDetails.contains(e.target)) langDetails.open = false;
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && langDetails.open) langDetails.open = false;
+  });
+}
+
 function revealOnScroll(el, fromVars, toVars, scrollTrigger) {
   gsap.fromTo(el, fromVars, {
     ...toVars,
