@@ -52,8 +52,8 @@ for f in "${REQUIRED[@]}"; do
 done
 ok "all deploy artifacts present"
 
-check_html_page "index.html" "css/main.css" "js/main.js" 'href="en/"'
-check_html_page "en/index.html" "../css/main.css" "../js/main.js" 'href="../"'
+check_html_page "index.html" "/css/main.css" "/js/main.js" 'href="/en/"'
+check_html_page "en/index.html" "/css/main.css" "/js/main.js" 'href="/"'
 
 # --- CSS a11y guardrails ---
 grep -q ':focus-visible' css/main.css || fail 'css must define :focus-visible styles'

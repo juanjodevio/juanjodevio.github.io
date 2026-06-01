@@ -56,7 +56,7 @@ npx --yes serve -p 8765
 
 Abre [http://127.0.0.1:8765/](http://127.0.0.1:8765/) o [http://127.0.0.1:8765/en/](http://127.0.0.1:8765/en/).
 
-También puedes abrir `index.html` o `en/index.html` con doble clic: los assets usan rutas relativas (`css/`, `js/`, `en/`). GSAP sigue requiriendo internet.
+Los assets usan rutas desde la raíz del sitio (`/css/main.css`, etc.), así que para desarrollo local usa un servidor estático (abrir el HTML con doble clic no cargará CSS/JS).
 
 GSAP se carga desde CDN; hace falta conexión a internet para animaciones y marquee acelerado por scroll.
 

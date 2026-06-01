@@ -68,7 +68,8 @@ nav{
   pointer-events:none;
 }
 nav .brand,nav .nav-end{pointer-events:auto}
-nav .brand{font-weight:600;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:inherit;text-decoration:none;transition:color .2s}
+nav a.brand,nav .nav-links a,nav .nav-lang a{text-decoration:none}
+nav .brand{font-weight:600;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:inherit;transition:color .2s}
 nav .brand:hover{color:var(--accent)}
 nav .nav-end{display:flex;align-items:center;gap:18px;flex-wrap:wrap;justify-content:flex-end}
 nav .nav-links{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
@@ -78,9 +79,8 @@ nav .nav-prompt{color:var(--accent)}
 nav .nav-links a:hover{color:var(--paper)}
 nav .nav-links a:hover .nav-prompt{color:var(--accent)}
 .nav-lang{position:relative;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--body-on-dark)}
-.nav-lang-toggle{list-style:none;cursor:pointer;color:inherit;font:inherit;letter-spacing:.02em}
-.nav-lang-toggle::-webkit-details-marker{display:none}
-.nav-lang-toggle::marker{content:''}
+.nav-lang>summary{list-style:none;cursor:pointer;color:inherit;font:inherit;letter-spacing:.02em}
+.nav-lang>summary::-webkit-details-marker,.nav-lang>summary::marker{display:none;content:''}
 .nav-lang-toggle:hover,.nav-lang[open] .nav-lang-toggle{color:var(--paper)}
 .nav-lang-toggle:hover .nav-prompt,.nav-lang[open] .nav-lang-toggle .nav-prompt{color:var(--accent)}
 .nav-lang-code{color:var(--paper);text-transform:lowercase}
@@ -110,7 +110,8 @@ nav.on-light .nav-lang-option.is-active{color:var(--accent2)}
 .hero .top{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--accent);letter-spacing:1px;margin-bottom:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;border-bottom:1px solid var(--line);padding-bottom:16px}
 .giant{font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;line-height:.82;letter-spacing:-.01em}
 .giant .l{display:block;overflow:hidden}
-.giant .l span{display:block;transform:translateY(0)}
+.giant .l span{display:block;transform:translate3d(0,0,0)}
+html.js-motion .hero .giant .l span{will-change:transform}
 .giant,.htitle,.cta h2{text-wrap:balance}
 .hero .giant{display:flex;flex-direction:column;align-items:flex-start;gap:clamp(6px,.55vw,14px);line-height:.9}
 .hero .r1{font-size:clamp(2.5rem,10vw,6rem)}

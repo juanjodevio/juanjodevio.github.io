@@ -105,14 +105,21 @@ window.addEventListener('load', () => {
   if (typeof ScrollTrigger !== 'undefined') gsap.registerPlugin(ScrollTrigger);
 
   try {
-    root.classList.add('js-motion');
-
     // Hero: intentional load reveal (GSAP absent → CSS keeps copy visible)
     gsap.fromTo(
       '.hero .giant .l span',
       { y: '110%' },
-      { y: 0, duration: 1.1, stagger: 0.14, ease: 'expo.out', delay: 0.15 }
+      {
+        y: 0,
+        duration: 1.1,
+        stagger: 0.14,
+        ease: 'expo.out',
+        delay: 0.15,
+        immediateRender: false
+      }
     );
+
+    root.classList.add('js-motion');
 
     gsap.utils.toArray('.mask .mi').forEach((mi) => {
       revealOnScroll(
