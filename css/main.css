@@ -127,7 +127,7 @@ html.js-motion .hero .giant .l span{will-change:transform}
 
 /* marquee */
 .marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:22px 0;overflow:hidden;white-space:nowrap;background:var(--bg)}
-.marquee .track{display:inline-flex;gap:0;animation:scroll 26s linear infinite}
+.marquee .track{display:inline-flex;gap:0;animation:scroll var(--marquee-duration,26s) linear infinite}
 .marquee span{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:42px;letter-spacing:.02em;padding:0 28px;color:var(--paper)}
 .marquee span:nth-child(even){color:transparent;-webkit-text-stroke:.5px var(--paper);paint-order:stroke fill}
 .marquee .star{color:var(--accent)!important;-webkit-text-stroke:0!important}

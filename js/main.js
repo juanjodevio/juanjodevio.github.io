@@ -141,16 +141,17 @@ window.addEventListener('load', () => {
 
     const track = document.getElementById('track');
     if (track && typeof ScrollTrigger !== 'undefined') {
+      const baseMarqueeDuration = 26;
+      let marqueeDuration = baseMarqueeDuration;
       ScrollTrigger.create({
         trigger: document.body,
         start: 'top top',
         end: 'bottom bottom',
-        onUpdate: (s) => {
-          gsap.to(track, {
-            timeScale: 1 + Math.abs(s.getVelocity() / 300),
-            duration: 0.3,
-            overwrite: true
-          });
+        onUpdate: (self) => {
+          const speed = 1 + Math.abs(self.getVelocity() / 300);
+          const target = Math.max(6, baseMarqueeDuration / speed);
+          marqueeDuration += (target - marqueeDuration) * 0.35;
+          track.style.setProperty('--marquee-duration', `${marqueeDuration.toFixed(2)}s`);
         }
       });
     }
