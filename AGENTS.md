@@ -77,7 +77,7 @@ Shared: `css/main.css`, `js/main.js`. Section IDs stay aligned: `#sobre`, `#serv
 
 - New/removed/reordered sections or nav items
 - Hero, services, contact, footer, or JSON-LD fields that exist on both pages
-- Language switcher (`details.nav-lang`) and `hreflang` / `canonical` (production URLs stay `https://juanjodev.io/…`)
+- Language switcher (`details.nav-lang`), reciprocal `hreflang` / `canonical` on both HTML pages, and `sitemap.xml` alternates (production URLs stay `https://juanjodev.io/…`)
 - Asset paths: both pages use site-root URLs (`/css/main.css`, `/js/main.js`, `/favicon.svg`); lang links use `/` and `/en/`
 
 **Do not** translate by duplicating logic in JS or adding a client-only i18n layer without an explicit request.

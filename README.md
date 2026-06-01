@@ -11,7 +11,7 @@ Portfolio personal de [Juan Palomino](https://juanjodev.io): **Data + AI Enginee
 | `/` | `index.html` | Español (por defecto, `hreflang` x-default) |
 | `/en/` | `en/index.html` | Inglés |
 
-Cada página incluye `hreflang`, `canonical` propio y un switch en el nav (`$ lang en` / `$ lang es`). Misma estructura, IDs de sección (`#sobre`, `#servicios`, `#contacto`) y assets en `/css` y `/js`.
+Cada página incluye `hreflang` recíproco (es, en, x-default), `canonical` propio, enlace al sitemap y un switch en el nav (`$ lang en` / `$ lang es`). `robots.txt` y `sitemap.xml` en la raíz declaran ambas URLs y los alternates para buscadores. Misma estructura, IDs de sección (`#sobre`, `#servicios`, `#contacto`) y assets en `/css` y `/js`.
 
 ## Stack
 
@@ -36,6 +36,8 @@ Sin bundler, framework ni dependencias npm en runtime.
 ├── favicon.svg
 ├── og-image.svg        # Open Graph / Twitter (1200×630)
 ├── CNAME               # Dominio custom
+├── robots.txt          # Allow + Sitemap URL
+├── sitemap.xml         # / y /en/ con hreflang
 ├── scripts/validate.sh # Comprobaciones locales y en CI
 ├── PRODUCT.md          # Propósito, audiencia, anti-referencias
 ├── DESIGN.md           # Tokens de color, tipo y componentes

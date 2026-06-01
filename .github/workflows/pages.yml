@@ -43,7 +43,7 @@ jobs:
       - name: Prepare site artifact
         run: |
           mkdir -p _site
-          cp -r index.html favicon.svg og-image.svg CNAME css js en _site/
+          cp -r index.html favicon.svg og-image.svg CNAME css js en robots.txt sitemap.xml _site/
           touch _site/.nojekyll
 
       - name: Configure Pages

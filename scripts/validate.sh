@@ -29,8 +29,10 @@ check_html_page() {
   grep -q 'href="#sobre"' "$file" || fail "${file} missing #sobre anchor"
   grep -q 'href="#servicios"' "$file" || fail "${file} missing #servicios anchor"
   grep -q 'class="nav-links"' "$file" || fail "${file} missing nav section links"
-  grep -q 'hreflang="es"' "$file" || fail "${file} missing hreflang es"
-  grep -q 'hreflang="en"' "$file" || fail "${file} missing hreflang en"
+  grep -q 'hreflang="es" href="https://juanjodev.io/"' "$file" || fail "${file} missing hreflang es → /"
+  grep -q 'hreflang="en" href="https://juanjodev.io/en/"' "$file" || fail "${file} missing hreflang en → /en/"
+  grep -q 'hreflang="x-default" href="https://juanjodev.io/"' "$file" || fail "${file} missing hreflang x-default"
+  grep -q 'juanjodev.io/sitemap.xml' "$file" || fail "${file} missing sitemap link"
   grep -q 'class="nav-lang"' "$file" || fail "${file} missing language dropdown"
   grep -q 'nav-lang-menu' "$file" || fail "${file} missing language menu"
   grep -q "${lang_href}" "$file" || fail "${file} missing alternate language link"
@@ -44,6 +46,8 @@ REQUIRED=(
   favicon.svg
   og-image.svg
   CNAME
+  robots.txt
+  sitemap.xml
   css/main.css
   js/main.js
 )
@@ -143,10 +147,13 @@ for _ in $(seq 1 20); do
 done
 [[ "$ready" -eq 1 ]] || fail "local HTTP server did not start on port ${PORT}"
 
-for path in / /en/ /en/index.html /css/main.css /js/main.js; do
+for path in / /en/ /en/index.html /css/main.css /js/main.js /robots.txt /sitemap.xml; do
   code="$(curl -s -o /dev/null -w '%{http_code}' "${base}${path}")"
   [[ "$code" == "200" ]] || fail "GET ${path} returned HTTP ${code}, expected 200"
 done
+grep -q 'Sitemap: https://juanjodev.io/sitemap.xml' robots.txt || fail 'robots.txt must reference sitemap'
+grep -q 'https://juanjodev.io/en/' sitemap.xml || fail 'sitemap.xml must list /en/'
+grep -q 'hreflang="en"' sitemap.xml || fail 'sitemap.xml must declare hreflang alternates'
 ok "static HTTP smoke passed"
 
 echo "validate: all checks passed"
