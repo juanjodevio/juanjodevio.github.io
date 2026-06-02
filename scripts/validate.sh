@@ -31,7 +31,7 @@ check_html_page() {
   grep -q 'class="nav-links"' "$file" || fail "${file} missing nav section links"
   grep -q 'hreflang="es" href="https://juanjodev.io/"' "$file" || fail "${file} missing hreflang es → /"
   grep -q 'hreflang="en" href="https://juanjodev.io/en/"' "$file" || fail "${file} missing hreflang en → /en/"
-  grep -q 'hreflang="x-default" href="https://juanjodev.io/"' "$file" || fail "${file} missing hreflang x-default"
+  grep -q 'hreflang="x-default" href="https://juanjodev.io/en/"' "$file" || fail "${file} missing hreflang x-default"
   grep -q 'juanjodev.io/sitemap.xml' "$file" || fail "${file} missing sitemap link"
   grep -q 'class="nav-lang"' "$file" || fail "${file} missing language dropdown"
   grep -q 'nav-lang-menu' "$file" || fail "${file} missing language menu"
